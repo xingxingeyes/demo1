@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 配置User对象创建 -->
+    <bean id="user" class="com.kai.demo1.User"></bean>
+
+    <!-- 2.set方法注入属性 -->
+    <bean id="book" class="com.kai.demo1.Book">
+        <!-- 使用property完成属性注入-->
+        <property name="name" value="java编程思想"></property>
+        <property name="author" value="大神"></property>
+
+        <!-- null标签设置空值 -->
+        <!--        <property name="address">-->
+        <!--            <null/>-->
+        <!--        </property>-->
+        <!-- 属性值中包含特殊符号 <<南京>>
+                1.把<>进行转义 &lt;&gt;
+                    &lt;&lt;南京&gt;&gt;
+                2.把带特殊符号内容写到CDATA
+                    <![CDATA[<<南京>>]]>
+         -->
+        <property name="address">
+            <value>
+                <![CDATA[<<南京>>]]>
+            </value>
+        </property>
+    </bean>
+    <!-- 3有参构造属性注入-->
+    <bean id="order" class="com.kai.demo1.Order">
+        <constructor-arg name="oname" value="java并发编程实战"/>
+        <constructor-arg name="address" value="中国"/>
+    </bean>
+
+    <!-- 5. P名称空间注入   -->
+    <!--    <bean id="book" class="com.kai.demo1.Book" p:name="名称" p:author="英国"></bean>-->
+
+</beans>
